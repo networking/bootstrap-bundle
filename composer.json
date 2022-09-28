@@ -53,7 +53,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Networking\\BootstrapBundle\\": "src",
+            "Networking\\BootstrapBundle\\": "src"
         },
         "exclude-from-classmap": [
             "/Tests/"
