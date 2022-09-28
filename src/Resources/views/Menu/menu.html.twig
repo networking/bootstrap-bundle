@@ -1,0 +1,20 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block linkElement %}
+    {% apply spaceless %}
+        {% import 'knp_menu.html.twig' as macros %}
+        <a href="{{ item.uri }}"{{ macros.attributes(item.linkAttributes) }}>
+            {% if item.extras.icon|default(false) %}
+                {{ networking_bootstrap_icon(item.extras.icon, item.extras.icon_white|default(false)) }}{{ ' ' }}
+            {%- endif %}
+            {{ block('label') }}
+            {% import '@NetworkingBootstrap/macros.html.twig' as badgemacro %}
+            {%- if item.extras.badge|default(false) %}
+                {{ badgemacro.badge(item.extras.badge, false, item.extras.badge_class) }}
+            {% endif -%}
+            {%- if item.extras.caret|default(false) %}
+                <b class="caret"></b>
+            {% endif -%}
+        </a>
+    {% endapply %}
+{% endblock %}

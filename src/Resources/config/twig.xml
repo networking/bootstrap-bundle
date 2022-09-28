@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="networking_bootstrap.twig.extension.form.class">Networking\BootstrapBundle\Twig\FormExtension</parameter>
+        <parameter key="networking_bootstrap.twig.extension.icon.class">Networking\BootstrapBundle\Twig\IconExtension</parameter>
+        <parameter key="networking_bootstrap.twig.extension.flash.class">Networking\BootstrapBundle\Twig\FlashExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="networking_bootstrap.twig.extension.bootstrap_form" class="%networking_bootstrap.twig.extension.form.class%">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="networking_bootstrap.twig.extension.bootstrap_icon" class="%networking_bootstrap.twig.extension.icon.class%">
+            <argument>%networking_bootstrap.icons.icon_set%</argument>
+            <argument>%networking_bootstrap.icons.shortcut%</argument>
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="networking_bootstrap.twig.extension.bootstrap_flash" class="%networking_bootstrap.twig.extension.flash.class%">
+            <argument type="collection" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

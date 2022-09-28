@@ -1,0 +1,168 @@
+NetworkingBootstrapBundle (Clone of MopaBootstrapBundle)
+========================================================
+
+This is a clone of the MopaBootstrapBundle, which works with symfony 6. 
+
+I created this clone, so that I can continue developing our InitCmsBundle with mopa/bootstrap-bundle. 
+
+This Bundle will likely be removed once the mopa/bootstrap-bundle can be used with symfony 6.
+
+For official documentation, view the mopa/bootstrap-bundle phiamo/MopaBootstrapBundle/
+
+[![Build Status](https://github.com/phiamo/MopaBootstrapBundle/workflows/Continuous%20integration/badge.svg?branch=master)](https://github.com/phiamo/MopaBootstrapBundle/actions?query=workflow%3A%22Continuous%20integration%22%20branch%3Amaster)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0a6dbd4c-714b-47a4-b662-254cdf6ec208/mini.png)](https://insight.sensiolabs.com/projects/0a6dbd4c-714b-47a4-b662-254cdf6ec208)
+[![Coverage Status](https://coveralls.io/repos/phiamo/MopaBootstrapBundle/badge.svg)](https://coveralls.io/r/phiamo/MopaBootstrapBundle)
+
+MopaBootstrapBundle is a collection of code to integrate twitter's bootstrap
+(http://twitter.github.com/bootstrap/) as easy as possible into your symfony
+(http://www.symfony.com) Project.
+
+To use MopaBootstrapBundle and Twitter's Bootstrap 3 in your project add it via [composer](Resources/doc/install/1-getting-started.md)
+
+Versions and dependencies
+-------------------------
+
+| MopaBootstrapBundle    | Bootstrap | Symfony                  | PHP            |
+|------------------------| --------- | ------------------------ | -------------- |
+| [**3.5**] (**master**) | ^3.0      | ^4.4 \|\| ^5.1 \|\| ^6.1 | ^7.2 \|\| ^8.0 |
+
+
+
+Updates
+-------
+
+*New in 3.1*: The way `horizontal` works has been slightly altered due to a change in Symfony forms. This may or may
+not affect some behavior of your existing forms. ALL root form elements, whether they have a parent form or not will
+start with `horizontal` === `true` (or whatever value you set in the config). For the most part this shouldn't affect many users.
+
+`horizontal` will also correctly pass itself down to collection types (and all child forms). So if your collection is horizontal,
+so will the collection items. If you want your collection items only to be inline, then you can pass these options to your collection:
+
+```php
+array(
+    'entry_options' => array('horizontal' => false), //   2.8+
+    'options' => array('horizontal' => false),       // < 2.8
+)
+```
+
+`horizontal_wrap_children` has been removed, as this can be solved using the above options.
+
+
+Branches
+--------
+
+To use this bundle with bootstrap 3 use the latest release:
+
+```sh
+composer require networking/bootstrap-bundle twbs/bootstrap
+```
+
+Or config via composer.json
+
+For LESS:
+
+``` json
+{
+    "require": {
+        "networking/bootstrap-bundle": "~3.0",
+        "twbs/bootstrap": "~3.3.0"
+    }
+}
+```
+
+For SASS:
+
+``` json
+{
+    "require": {
+        "networking/bootstrap-bundle": "~3.0",
+        "twbs/bootstrap-sass": "~3.3.0"
+    }
+}
+```
+
+If you wish to use the current master branch, then use the following:
+
+
+```sh
+composer require networking/bootstrap-bundle:dev-master twbs/bootstrap:dev-master
+```
+
+For bootstrap 2 use the v2.3.x branch:
+
+```sh
+composer require networking/bootstrap-bundle:2.3.x-dev twbs/bootstrap:2.3.2
+```
+
+To understand which versions are currently required have a look into `BRANCHES.md`
+
+Documentation
+-------------
+
+The bulk of the documentation is stored in the [Resources/doc](Resources/doc) folder in this bundle
+In any case, if something is not working as expected after a update:
+
+* [READ the CHANGELOG!](https://github.com/phiamo/MopaBootstrapBundle/blob/master/CHANGELOG.md)
+
+Live Show
+---------
+
+To see the bundle, its capabilities and some more doc just have a look on
+
+[MopaBootstrapBundle Live](http://bootstrap.mohrenweiserpartner.de)
+
+Additional Resources:
+
+*  [MopaBootstrapSandboxBundle](http://github.com/phiamo/MopaBootstrapSandboxBundle) - Seperate live docs from code
+*  [symfony-bootstrap](https://github.com/phiamo/symfony-bootstrap) is also available
+
+Installation
+------------
+
+Installation instructions are located in the
+
+* [master documentation](Resources/doc/install/1-getting-started.md)
+
+Included Features
+-----------------
+
+* Bootstrap Version detection via Composer Bridge
+* Twig Extensions and templates for use with symfony2 Form component
+  * control your form either via the form builder or the template engine
+  * control nearly every bootstrap2 form feature
+  * javascript and twig blocks for dynamic collections
+* A generic Navbar class to generate your Navbar outside the template
+  * helpers for dropdowns, seperators, etc.
+* A generic Tab class to Manage bootstrap tabbing
+* Twig templates for KnpPaginatorBundle (https://github.com/knplabs/KnpPaginatorBundle)
+* Twig templates for CraueFormFlowBundle (https://github.com/craue/CraueFormFlowBundle)
+* Twig template for KnpMenuBundle (https://github.com/KnpLabs/KnpMenuBundle)
+  * icon support on menu links
+
+Translations
+------------
+If you use [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle) with MopaBootstrapBundle, you can translate labels to your language.
+To do this add new file
+
+```sh
+Resources/translations/pagination.[YOUR LOCALE CODE].yml
+```
+
+As example you have there Polish translation.
+
+Versioning
+----------
+We aim to follow [semantic versioning](http://semver.org) with our releases.
+
+Contribute
+----------
+If you want to contribute your code to MopaBootstrapBundle please be sure that your PR's
+are valid to Symfony2.1 Coding Standards. You can automatically fix your code for that
+with [PHP-CS-Fixer](http://cs.sensiolabs.org) tool.
+
+You can see who already contributed to this project on [Contributors](https://github.com/phiamo/MopaBootstrapBundle/contributors) page
+
+License
+-------
+
+This bundle is under the MIT license. For more information, see the complete [LICENSE](Resources/meta/LICENSE) file in the bundle.

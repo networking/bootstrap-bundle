@@ -1,0 +1,26 @@
+# Project #
+###########
+Resources/public/bootstrap
+Resources/public/bootstrap-sass
+
+# Composer #
+############
+/composer.lock
+/vendor
+composer.phar
+
+# IDE files   #
+###############
+/.buildpath
+/.settings
+/.project
+
+
+*.sublime*
+
+*~
+
+
+# Keep .gitkeep #
+#################
+!.gitkeep

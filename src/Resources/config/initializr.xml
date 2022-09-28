@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="networking_bootstrap.twig.extension.initializr.class">Networking\BootstrapBundle\Twig\InitializrTwigExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="networking_bootstrap.twig.extension.initializr" class="%networking_bootstrap.twig.extension.initializr.class%">
+            <argument type="collection" >
+                <argument key="meta">%networking_bootstrap.initializr.meta%</argument>
+                <argument key="dns_prefetch">%networking_bootstrap.initializr.dns_prefetch%</argument>
+                <argument key="google">%networking_bootstrap.initializr.google%</argument>
+                <argument key="diagnostic_mode">%networking_bootstrap.initializr.diagnostic_mode%</argument>
+            </argument>
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

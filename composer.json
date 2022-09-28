@@ -1,0 +1,70 @@
+{
+    "name": "networking/bootstrap-bundle",
+    "type": "symfony-bundle",
+    "description": "Easy integration of twitters bootstrap into symfony2",
+    "keywords": [
+        "form",
+        "extra form",
+        "bootstrap",
+        "bootstrap form",
+        "template"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yorkie Chadwick",
+            "email": "y.chadwick@networking.ch"
+        },
+        {
+            "name": "Philipp A. Mohrenweiser",
+            "email": "phiamo@googlemail.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/phiamo/MopaBootstrapBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "mopa/composer-bridge": "^1.3",
+        "symfony/console": "^4.4 || ^5.1 || ^6.0",
+        "symfony/form": "^4.4 || ^5.1 || ^6.0",
+        "symfony/framework-bundle": "^4.4 || ^5.1 || ^6.0",
+        "symfony/twig-bundle": "^4.4 || ^5.1 || ^6.0",
+        "twig/twig": "^2.9 || ^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5 || ^9.4",
+        "symfony/security-bundle": "^4.4 || ^5.1 || ^6.0",
+        "symfony/translation-contracts": "^2.0"
+    },
+    "suggest": {
+        "craue/formflow-bundle": "~2.0",
+        "knplabs/knp-menu-bundle": "~3.0",
+        "knplabs/knp-paginator-bundle": "~2.3",
+        "mopa/bootstrap-sandbox-bundle": "~2.3",
+        "twbs/bootstrap": ">2.0,<4.0-dev",
+        "twbs/bootstrap-sass": "v3.1.1"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "5.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Networking\\BootstrapBundle\\": "src",
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+        ],
+        "post-update-cmd": [
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+        ]
+    }
+}
