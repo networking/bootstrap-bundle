@@ -23,7 +23,6 @@ class BootstrapSymlinkSassCommand extends BaseBootstrapSymlinkCommand
     public static $targetSuffix = '-sass';
     public static $pathName = 'TwitterBootstrapSass';
 
-    protected static $defaultName = 'mopa:bootstrap:symlink:sass';
 
     protected function getTwitterBootstrapName()
     {

@@ -34,8 +34,6 @@ class InstallFontCommand extends Command
         'zmdi' => 'fonts/zmdi',
     ];
 
-    protected static $defaultName = 'mopa:bootstrap:install:font';
-
     /**
      * @var KernelInterface
      */

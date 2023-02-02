@@ -22,7 +22,6 @@ class BootstrapSymlinkLessCommand extends BaseBootstrapSymlinkCommand
     public static $mopaBootstrapBundleName = 'networking/bootstrap-bundle';
     public static $twitterBootstrapName = 'twbs/bootstrap';
 
-    protected static $defaultName = 'mopa:bootstrap:symlink:less';
 
     protected function getTwitterBootstrapName()
     {
