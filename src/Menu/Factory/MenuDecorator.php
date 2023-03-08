@@ -59,6 +59,7 @@ class MenuDecorator implements ExtensionInterface
                 ->setAttribute('class', \trim('dropdown '.$item->getAttribute('class')))
                 ->setLinkAttribute('class', 'dropdown-toggle')
                 ->setLinkAttribute('data-toggle', 'dropdown')
+                ->setLinkAttribute('data-bs-toggle', 'dropdown')
                 ->setChildrenAttribute('class', 'dropdown-menu')
                 ->setChildrenAttribute('role', 'menu');
 
