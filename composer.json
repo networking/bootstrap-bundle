@@ -26,7 +26,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "mopa/composer-bridge": "dev-master",
+        "mopa/composer-bridge": "dev-master as v1.5.0",
         "symfony/console": "^6.0",
         "symfony/form": "^6.0",
         "symfony/framework-bundle": " ^6.0",
