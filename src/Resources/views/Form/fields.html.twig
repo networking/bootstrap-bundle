@@ -734,15 +734,15 @@
 {# used to determine which type of error #}
 
 {% block error_type %}
-    {% apply spaceless %}
-        {% if error_type %}
-            {{ error_type }}
-        {% elseif form.parent == null %}
-            {{ form.vars.error_type | default('inline') }}
-        {% else %}
-            block
-        {% endif %}
-    {% endapply %}
+{% apply spaceless %}
+    {% if error_type %}
+        {{ error_type }}
+    {% elseif form.parent == null %}
+        {{ form.vars.error_type | default('inline') }}
+    {% else %}
+        block
+    {% endif %}
+{% endapply %}
 {% endblock error_type %}
 
 {# widget helper blocks #}
