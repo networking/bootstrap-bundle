@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "mopa/composer-bridge": "dev-master as v1.5.0",
         "symfony/console": "^6.0",
         "symfony/form": "^6.0",
@@ -41,7 +41,7 @@
     "suggest": {
         "craue/formflow-bundle": "~2.0",
         "knplabs/knp-menu-bundle": "~3.0",
-        "knplabs/knp-paginator-bundle": "~5.9",
+        "knplabs/knp-paginator-bundle": "^6.2",
         "twbs/bootstrap": ">2.0,<4.0-dev",
         "twbs/bootstrap-sass": "v3.4"
     },
