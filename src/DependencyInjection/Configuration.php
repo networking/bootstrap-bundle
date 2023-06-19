@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -17,7 +18,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    const KEY = 'networking_bootstrap';
+    final public const KEY = 'networking_bootstrap';
 
     /**
      * {@inheritdoc}
@@ -379,12 +380,8 @@ class Configuration implements ConfigurationInterface
 
     protected function addFlashConfig(ArrayNodeDefinition $rootNode)
     {
-        $fnTest = function ($v) {
-            return !\is_array($v);
-        };
-        $fnThen = function ($v) {
-            return [$v];
-        };
+        $fnTest = fn($v) => !\is_array($v);
+        $fnThen = fn($v) => [$v];
 
         $rootNode
             ->children()

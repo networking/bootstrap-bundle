@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Twig;
 
 use Twig\Environment;
@@ -24,28 +25,15 @@ use Twig\TwigFunction;
 class IconExtension extends AbstractExtension
 {
     /**
-     * @var string
-     */
-    protected $iconSet;
-
-    /**
-     * @var string|null
-     */
-    protected $shortcut;
-
-    /**
      * @var TemplateWrapper|null
      */
     protected $iconTemplate;
 
     /**
      * @param string      $iconSet
-     * @param string|null $shortcut
      */
-    public function __construct($iconSet, $shortcut = null)
+    public function __construct(protected $iconSet, protected ?string $shortcut = null)
     {
-        $this->iconSet = $iconSet;
-        $this->shortcut = $shortcut;
     }
 
     public function getFunctions(): array
@@ -56,11 +44,11 @@ class IconExtension extends AbstractExtension
         ];
 
         $functions = [
-            new TwigFunction('networking_bootstrap_icon', [$this, 'renderIcon'], $options),
+            new TwigFunction('networking_bootstrap_icon', $this->renderIcon(...), $options),
         ];
 
         if ($this->shortcut) {
-            $functions[] = new TwigFunction($this->shortcut, [$this, 'renderIcon'], $options);
+            $functions[] = new TwigFunction($this->shortcut, $this->renderIcon(...), $options);
         }
 
         return $functions;

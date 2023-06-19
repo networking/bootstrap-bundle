@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -28,7 +29,7 @@ class FormExtension extends AbstractExtension
     {
         return [
             new TwigFunction('form_tabs', null, [
-                'node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode',
+                'node_class' => \Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode::class,
                 'is_safe' => ['html'],
             ]),
         ];

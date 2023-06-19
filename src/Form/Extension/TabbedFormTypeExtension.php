@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Form\Extension;
 
 use Networking\BootstrapBundle\Form\Type\TabsType;
@@ -25,28 +26,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TabbedFormTypeExtension extends AbstractTypeExtension
 {
     /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var array
-     */
-    private $options;
-
-    /**
      * Constructor.
      */
-    public function __construct(FormFactoryInterface $formFactory, array $options)
+    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly array $options)
     {
-        $this->formFactory = $formFactory;
-        $this->options = $options;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'tabs_class' => $this->options['class'],
@@ -56,7 +45,7 @@ class TabbedFormTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['tabbed'] = false;
     }
@@ -64,7 +53,7 @@ class TabbedFormTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function finishView(FormView $view, FormInterface $form, array $options): void
     {
         if (!$view->vars['tabbed']) {
             return;

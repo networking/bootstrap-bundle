@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Command;
 
 use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
@@ -40,14 +41,10 @@ abstract class BaseBootstrapSymlinkCommand extends Command
     protected $output;
 
     /**
-     * @var string
+     * @param string $bootstrapInstallPath
      */
-    private $bootstrapInstallPath;
-
-    public function __construct($bootstrapInstallPath)
+    public function __construct(private $bootstrapInstallPath)
     {
-        $this->bootstrapInstallPath = $bootstrapInstallPath;
-
         parent::__construct();
     }
 
@@ -62,7 +59,7 @@ abstract class BaseBootstrapSymlinkCommand extends Command
      *
      * @throws \Exception
      */
-    public static function checkSymlink($symlinkTarget, $symlinkName, $forceSymlink = false)
+    public static function checkSymlink($symlinkTarget, $symlinkName, $forceSymlink = false): bool
     {
         if ($forceSymlink && \file_exists($symlinkName) && !\is_link($symlinkName)) {
             if ('link' != \filetype($symlinkName)) {
@@ -97,7 +94,7 @@ abstract class BaseBootstrapSymlinkCommand extends Command
      *
      * @throws \Exception
      */
-    public static function createSymlink($symlinkTarget, $symlinkName)
+    public static function createSymlink($symlinkTarget, $symlinkName): void
     {
         if (false === @\symlink($symlinkTarget, $symlinkName)) {
             throw new \Exception('An error occurred while creating symlink'.$symlinkName);
@@ -115,7 +112,7 @@ abstract class BaseBootstrapSymlinkCommand extends Command
      *
      * @throws \Exception
      */
-    public static function createMirror($symlinkTarget, $symlinkName)
+    public static function createMirror($symlinkTarget, $symlinkName): void
     {
         if (\strlen($symlinkTarget) == 0 || empty($symlinkTarget)) {
             throw new \Exception('symlinkTarget empty!'.\var_export($symlinkTarget, true));
@@ -136,7 +133,7 @@ abstract class BaseBootstrapSymlinkCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Check and if possible install symlink to '.static::$targetSuffix)
@@ -218,15 +215,15 @@ abstract class BaseBootstrapSymlinkCommand extends Command
             throw new \Exception('pathToMopaBootstrapBundle not specified');
         }
 
-        if (!\is_dir(\dirname($symlinkName))) {
-            throw new \Exception('pathToMopaBootstrapBundle: '.\dirname($symlinkName).' does not exist');
+        if (!\is_dir(\dirname((string) $symlinkName))) {
+            throw new \Exception('pathToMopaBootstrapBundle: '.\dirname((string) $symlinkName).' does not exist');
         }
 
         if (empty($symlinkTarget)) {
             throw new \Exception(static::$pathName.' not specified');
         }
 
-        if (\substr($symlinkTarget, 0, 1) == '/') {
+        if (str_starts_with((string) $symlinkTarget, '/')) {
             $this->output->writeln('<comment>Try avoiding absolute paths, for portability!</comment>');
             if (!\is_dir($symlinkTarget)) {
                 throw new \Exception('Target path '.$symlinkTarget.'is not a directory!');
@@ -236,7 +233,7 @@ abstract class BaseBootstrapSymlinkCommand extends Command
         }
 
         if (!\is_dir($symlinkTarget)) {
-            throw new \Exception(static::$pathName.' would resolve to: '.$symlinkTarget."\n and this is not reachable from \npathToMopaBootstrapBundle: ".\dirname($symlinkName));
+            throw new \Exception(static::$pathName.' would resolve to: '.$symlinkTarget."\n and this is not reachable from \npathToMopaBootstrapBundle: ".\dirname((string) $symlinkName));
         }
 
         $dialog = $this->getHelperSet()->get('dialog');

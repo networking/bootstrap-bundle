@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Tests\Form;
 
 use Networking\BootstrapBundle\Form\Extension as MopaExtensions;
@@ -55,7 +56,7 @@ class TypeTestCase extends KernelTestCase
     {
         self::bootKernel();
         $this->container = self::$kernel->getContainer();
-        $this->dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')->getMock();
+        $this->dispatcher = $this->getMockBuilder(\Symfony\Component\EventDispatcher\EventDispatcherInterface::class)->getMock();
         $this->factory = Forms::createFormFactoryBuilder()
             ->addExtensions($this->getExtensions())
             ->getFormFactory();
@@ -184,7 +185,7 @@ class TypeTestCase extends KernelTestCase
     {
         return [
             $this->getMockBuilder(
-                'Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser'
+                \Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser::class
             )
                 ->disableOriginalConstructor()
                 ->getMock(),

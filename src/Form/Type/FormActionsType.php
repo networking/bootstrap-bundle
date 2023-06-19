@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +29,7 @@ class FormActionsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         foreach ($options['buttons'] as $name => $config) {
             $this->createButton($builder, $name, $config);
@@ -43,12 +44,10 @@ class FormActionsType extends AbstractType
      * @param $config
      *
      * @throws \InvalidArgumentException
-     *
-     * @return ButtonBuilder
      */
-    protected function createButton($builder, $name, $config)
+    protected function createButton($builder, $name, $config): ButtonBuilder
     {
-        $options = (isset($config['options'])) ? $config['options'] : [];
+        $options = $config['options'] ?? [];
 
         $builder->add($name, $config['type'], $options);
 
@@ -58,7 +57,7 @@ class FormActionsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'buttons' => [],
@@ -71,7 +70,7 @@ class FormActionsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['button_offset'] = $options['button_offset'];
     }

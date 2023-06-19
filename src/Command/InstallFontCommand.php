@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Command;
 
 use Mopa\Bridge\Composer\Adapter\ComposerAdapter;
@@ -35,27 +36,17 @@ class InstallFontCommand extends Command
     ];
 
     /**
-     * @var KernelInterface
+     * @param string $iconSet
      */
-    private $kernel;
-
-    /**
-     * @var string
-     */
-    private $iconSet;
-
-    public function __construct(KernelInterface $kernel, $iconSet)
+    public function __construct(private readonly KernelInterface $kernel, private $iconSet)
     {
-        $this->kernel = $kernel;
-        $this->iconSet = $iconSet;
-
         parent::__construct();
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Install font to web/fonts')
@@ -102,7 +93,4 @@ EOT
         return 0;
     }
 
-    public static function installFonts()
-    {
-    }
 }

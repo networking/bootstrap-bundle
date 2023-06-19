@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -25,7 +27,11 @@ class MenuDecorator implements ExtensionInterface
     public function buildItem(ItemInterface $item, array $options): void
     {
         if ($options['navbar']) {
-            $item->setChildrenAttribute('class', 'nav navbar-nav'.($options['navbar-right'] ? ' navbar-right' : ''));
+            $item->setChildrenAttribute(
+                'class',
+                'nav navbar-nav'.($options['navbar-right'] ? ' navbar-right'
+                    : '')
+            );
         }
 
         if ($options['pills']) {
@@ -39,9 +45,9 @@ class MenuDecorator implements ExtensionInterface
 
         if ($options['dropdown-header']) {
             $item
-            ->setAttribute('role', 'presentation')
-            ->setAttribute('class', 'dropdown-header')
-            ->setUri(null);
+                ->setAttribute('role', 'presentation')
+                ->setAttribute('class', 'dropdown-header')
+                ->setUri(null);
         }
 
         if ($options['list-group']) {
@@ -56,7 +62,10 @@ class MenuDecorator implements ExtensionInterface
         if ($options['dropdown']) {
             $item
                 ->setUri('#')
-                ->setAttribute('class', \trim('dropdown '.$item->getAttribute('class')))
+                ->setAttribute(
+                    'class',
+                    \trim('dropdown '.$item->getAttribute('class'))
+                )
                 ->setLinkAttribute('class', 'dropdown-toggle')
                 ->setLinkAttribute('data-toggle', 'dropdown')
                 ->setLinkAttribute('data-bs-toggle', 'dropdown')
@@ -102,7 +111,7 @@ class MenuDecorator implements ExtensionInterface
      */
     public function buildOptions(array $options): array
     {
-        return \array_merge([
+        return [
             'navbar' => false,
             'navbar-right' => false,
             'pills' => false,
@@ -117,6 +126,7 @@ class MenuDecorator implements ExtensionInterface
             'divider' => false,
             'badge' => false,
             'badge-class' => false,
-        ], $options);
+            ...$options,
+        ];
     }
 }

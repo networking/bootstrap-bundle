@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Twig;
 
 use Knp\Menu\ItemInterface;
@@ -33,11 +34,6 @@ class MenuExtension extends AbstractExtension
     protected $helper;
 
     /**
-     * @var string
-     */
-    protected $menuTemplate;
-
-    /**
      * @var MenuConverter
      */
     protected $menuConverter;
@@ -45,30 +41,27 @@ class MenuExtension extends AbstractExtension
     /**
      * @param string $menuTemplate
      */
-    public function __construct(Helper $helper, $menuTemplate)
+    public function __construct(Helper $helper, protected $menuTemplate)
     {
         $this->helper = $helper;
-        $this->menuTemplate = $menuTemplate;
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('networking_bootstrap_menu', [$this, 'renderMenu'], ['is_safe' => ['html']]),
+            new TwigFunction('networking_bootstrap_menu', $this->renderMenu(...), ['is_safe' => ['html']]),
         ];
     }
 
     /**
      * Renders the Menu with the specified renderer.
      *
-     * @param ItemInterface|string|array $menu
      * @param string                     $renderer
      *
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
-    public function renderMenu($menu, array $options = [], $renderer = null)
+    public function renderMenu(\Knp\Menu\ItemInterface|string|array $menu, array $options = [], $renderer = null)
     {
         $options = \array_merge([
             'template' => $this->menuTemplate,

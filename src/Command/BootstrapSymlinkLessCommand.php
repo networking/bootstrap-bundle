@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -23,12 +24,12 @@ class BootstrapSymlinkLessCommand extends BaseBootstrapSymlinkCommand
     public static $twitterBootstrapName = 'twbs/bootstrap';
 
 
-    protected function getTwitterBootstrapName()
+    protected function getTwitterBootstrapName(): string
     {
         return self::$twitterBootstrapName;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 

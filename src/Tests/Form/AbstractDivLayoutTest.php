@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the MopaBootstrapBundle.
  *
@@ -8,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Networking\BootstrapBundle\Tests\Form;
 
 use Networking\BootstrapBundle\Form\Extension\EmbedFormExtension;
@@ -73,13 +74,11 @@ abstract class AbstractDivLayoutTest extends FormIntegrationTestCase
             'fields.html.twig',
         ], $this->environment);
 
-        $csrfProvider = $this->getMockBuilder('Symfony\Component\Security\Csrf\CsrfTokenManagerInterface')->getMock();
+        $csrfProvider = $this->getMockBuilder(\Symfony\Component\Security\Csrf\CsrfTokenManagerInterface::class)->getMock();
 
         // Add runtime loader
         $this->environment->addRuntimeLoader(new FactoryRuntimeLoader([
-            FormRenderer::class => function () use ($csrfProvider) {
-                return new FormRenderer($this->rendererEngine, $csrfProvider);
-            },
+            FormRenderer::class => fn() => new FormRenderer($this->rendererEngine, $csrfProvider),
         ]));
         $this->renderer = $this->environment->getRuntime(FormRenderer::class);
 
